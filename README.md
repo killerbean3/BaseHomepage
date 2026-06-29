@@ -1,75 +1,35 @@
-# React + TypeScript + Vite
+# Base Homepage
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Reusable landing-page template. Dark purple palette, pinned Header & Footer components, and full responsiveness.
 
-Currently, two official plugins are available:
+## Theme
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Palette**: dark `#0b0f19` / `#0f0f1e` backgrounds with `#a78bfa` (violet-purple) accent
+- **Toolbar**: glassmorphic header with `backdrop-filter: blur(6px)` and purple border accents
+- **Footer**: subtle divider line, copyright + legal links
+- All design tokens are CSS custom properties in [`src/index.css`](src/index.css)
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Structure
 
 ```
+src/
+  index.css          ← global CSS variables + page layout styles
+  components/
+    Header.tsx       ← reusable toolbar/header
+    Footer.tsx       ← reusable copyright/legal footer
+    index.ts         ← barrel export
+  App.tsx            ← demo landing page using the theme
+```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## How to customise
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Brand & nav** — edit `NAV_ITEMS` in [App.tsx](src/App.tsx) and pass `brandName` to `<Header />` / `<Footer />`.
+2. **Colors** — change any variable in [`:root`](src/index.css). All components consume them automatically.
+3. **Content** — replace the hero, feature blocks, and stats with your own text / images.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Dev
 
+```bash
+npm install
+npm run dev    # http://localhost:5173
 ```
